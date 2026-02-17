@@ -28,8 +28,7 @@
     "dev": "remotion studio",
     "build": "remotion bundle",
     "upgrade": "remotion upgrade",
-    "lint": "eslint src && tsc",
-    "download-music": "bash scripts/download-music.sh"
+    "lint": "eslint src && tsc"
   },
   "sideEffects": [
     "*.css"

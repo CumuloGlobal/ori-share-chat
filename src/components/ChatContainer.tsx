@@ -31,8 +31,8 @@ export const ChatContainer: React.FC<ChatContainerProps> = ({
   typingIndicators,
   scrollKeyframes,
   participants,
-  headerTitle = "The Boys \u{1F525}",
-  headerMembers = "Mat, Max, Steve, Ori",
+  headerTitle = "Group Chat",
+  headerMembers = "Alice, Bob, Ori",
   headerAvatars = [],
 }) => {
   const frame = useCurrentFrame();
