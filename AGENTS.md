@@ -21,7 +21,7 @@ Composition File (e.g. PlaceholderComposition.tsx)
   │   └─ PhoneFrame (iOS mockup with slide-in animation)
   │       └─ ChatContainer (messages, header, scroll, typing)
   │           ├─ ChatHeader (title + avatar stack)
-  │           ├─ ChatBubble[] (each message with reactions)
+  │           ├─ ChatBubble[] (each message)
   │           ├─ TypingIndicator (animated dots)
   │           └─ ChatInputBar
   ├─ Screen component (static phone, no animations, transparent BG)
@@ -76,13 +76,8 @@ export const myStoryConversation: Message[] = [
     id: 2,
     sender: "ori",
     senderName: "Ori",
-    text: "Reply with emoji \uD83D\uDE3C",
+    text: "Reply from Ori",
     appearFrame: 80,
-    reaction: {               // Optional single reaction
-      emoji: "\uD83D\uDD25",
-      count: 3,
-      appearFrame: 110,
-    },
   },
   {
     id: 3,
@@ -90,12 +85,6 @@ export const myStoryConversation: Message[] = [
     senderName: "Bob",
     text: "Another message",
     appearFrame: 140,
-    multiReaction: {          // Optional multiple reactions
-      emojis: [
-        { emoji: "\uD83D\uDE02", appearFrame: 165 },
-        { emoji: "\uD83D\uDC80", appearFrame: 177 },
-      ],
-    },
   },
 ];
 
@@ -116,8 +105,7 @@ export const myStoryTypingIndicators = [
 - First message at frame ~15
 - Space messages 30-50 frames apart for quick exchanges, 50-80 for longer gaps
 - Typing indicators should start ~35 frames before Ori's message and end 1 frame before `appearFrame`
-- Reactions appear 25-35 frames after the message they're on
-- Last reaction should finish ~40 frames before the composition ends
+- Last message should appear ~40 frames before the composition ends
 
 ### 2. Create or reuse a participant file
 
@@ -180,7 +168,7 @@ Use the `dark` prop on `PhoneFrame` for dark mode compositions.
 
 ### 5. Calculate duration
 
-Set `durationInFrames` to the last reaction's `appearFrame` + ~40 frames of buffer. The duration must match in:
+Set `durationInFrames` to the last message's `appearFrame` + ~40 frames of buffer. The duration must match in:
 1. `src/Root.tsx` (all `<Composition>` entries)
 2. `src/compositions.ts` (all metadata objects)
 
@@ -189,7 +177,6 @@ Set `durationInFrames` to the last reaction's `appearFrame` + ~40 frames of buff
 Run `pnpm dev` and preview all variants in Remotion Studio. Check that:
 - Messages appear and scroll correctly (auto-scroll handles this)
 - Typing indicators show before Ori's messages
-- Reactions animate in at the right time
 - No messages get clipped at the bottom
 
 ---
@@ -204,23 +191,12 @@ interface Message {
   text: string;                // Message content (supports unicode emoji)
   appearFrame: number;         // Frame when message appears
   image?: string;              // Optional image path (relative to public/)
-  reaction?: {                 // Single emoji reaction
-    emoji: string;
-    count: number;
-    appearFrame: number;
-  };
-  multiReaction?: {            // Multiple emoji reactions
-    emojis: Array<{
-      emoji: string;
-      appearFrame: number;
-    }>;
-  };
 }
 ```
 
 ## Auto-Scroll
 
-Scroll is computed automatically from message content and timing (`src/utils/autoScroll.ts`). No manual scroll keyframes needed. The system estimates bubble heights based on text length, images, and reactions, then generates smooth scroll transitions.
+Scroll is computed automatically from message content and timing (`src/utils/autoScroll.ts`). No manual scroll keyframes needed. The system estimates bubble heights based on text length and images, then generates smooth scroll transitions.
 
 ## Theme System
 

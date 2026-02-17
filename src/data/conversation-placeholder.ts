@@ -21,11 +21,6 @@ export const placeholderConversation: Message[] = [
     senderName: "Ori",
     text: "I thought you'd never ask! How about a hike followed by tacos?",
     appearFrame: 120,
-    reaction: {
-      emoji: "\uD83C\uDF2E",
-      count: 2,
-      appearFrame: 150,
-    },
   },
   {
     id: 4,
@@ -40,12 +35,6 @@ export const placeholderConversation: Message[] = [
     senderName: "Bob",
     text: "I'm in. Ori always has the best ideas",
     appearFrame: 230,
-    multiReaction: {
-      emojis: [
-        { emoji: "\uD83D\uDE02", appearFrame: 260 },
-        { emoji: "\uD83E\uDD29", appearFrame: 272 },
-      ],
-    },
   },
   {
     id: 6,
@@ -53,11 +42,6 @@ export const placeholderConversation: Message[] = [
     senderName: "Ori",
     text: "Saturday at 10am works for everyone. I'll send the trail link!",
     appearFrame: 340,
-    reaction: {
-      emoji: "\uD83D\uDE4C",
-      count: 2,
-      appearFrame: 375,
-    },
   },
 ];
 
